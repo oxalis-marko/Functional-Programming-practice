@@ -1,12 +1,5 @@
 # The Data Pipeline Processor
 
-# CONSTRAINTS
-# NO classes or objects(except given Enums)
-# NO mutations - always return new data structures
-# NO loops - use map/filter/reduce/recursion only
-# Pure functions - same input always producec same output
-# Use all FP concepts: first-class functions, closures, currying, recursion, sum types
-
 from enum import Enum
 from functools import reduce
 
@@ -193,11 +186,11 @@ def analytics_stage(orders): # tuple of all orders (processed, failed)
         # then zipped list of tiers and list of dictionaries I got previously
         # finally I created dictionary from list of tuples I got from zipping
         orders_per_tier = dict(list(zip(tiers, list(map(lambda tier_values: dict(list(zip(tier_params, tier_values))), map(lambda tier: analyze_tier(tier), tier_breakdown))))))
-        report["analytics"]["tier_breakdown"] = orders_per_tier
-        # another helper function to reduce repetability          
+        report["analytics"]["tier_breakdown"] = orders_per_tier          
 
         return report
-
+        
+    # another helper function to reduce repetability
     def analyze_tier(orders_of_tier):
         list_of_orders = orders_of_tier.copy()
         num_of_orders = len(list_of_orders)
